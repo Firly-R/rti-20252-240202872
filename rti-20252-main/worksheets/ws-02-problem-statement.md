@@ -61,59 +61,57 @@ Masalah riset yang layak harus memenuhi 5 kriteria:
 
 ---
 
-## Template A.2 — Problem Statement Builder
+## A.2 — Problem Statement Builder
 
 ```
 PROBLEM STATEMENT BUILDER
 
 Domain & Konteks
-  Domain   : ____________________
-  Konteks  : ____________________
+  Domain   : Computer Vision / Artificial Intelligence / Sistem Keamanan
+  Konteks  : Sistem keamanan akses pintu pegawai bank menggunakan teknologi face recognition berbasis CNN
 
 System Context
-  Input       : ____________________
-  Process     : ____________________
-  Output      : ____________________
-  Outcome     : ____________________
-  Constraints : ____________________
-  Stakeholders: ____________________
+  Input       : Citra wajah pegawai dari kamera
+  Process     : Akuisisi gambar, preprocessing, ekstraksi fitur, klasifikasi, identifikasi menggunakan CNN
+  Output      : Identitas pegawai
+  Outcome     : Identitas pegawai
+  Constraints : Kualitas gambar, jumlah dataset, kondisi pencahayaan, variasi ekspresi wajah
+  Stakeholders: Pegawai bank, manajemen bank, pengembang sistem
 
 Fenomena → Problem
-  Fenomena yang diamati             : ____________________
-  Gejala (symptom) yang terukur     : ____________________
-  Masalah yang didiagnosis          : ____________________
-  Masalah riset (researchable)      : ____________________
-  Variabel yang terukur             : ____________________
+  Fenomena yang diamati             : Sistem keamanan pintu masih menggunakan metode konvensional seperti kunci fisik dan kartu akses
+  Gejala (symptom) yang terukur     : Kartu akses bisa tertinggal / hilang, Akses tidak bisa dilakukan saat kartu tidak tersedia, Ketergantungan pada media fisik
+  Masalah yang didiagnosis          : Sistem keamanan masih bergantung pada autentikasi berbasis objek fisik, bukan biometrik
+  Masalah riset (researchable)      : Belum optimalnya performa sistem face recognition berbasis CNN dalam mengidentifikasi wajah secara akurat pada kondisi dataset terbatas dan variasi kualitas gambar
+  Variabel yang terukur             : Akurasi sistem, Jumlah dataset wajah, Kualitas citra (blur, pencahayaan), Tingkat keberhasilan identifikasi
 
 Problem Quality Check
-  [ ] Clarity — Apakah satu orang membaca akan paham?
-  [ ] Measurability — Apakah ada metrik kuantitatif?
-  [ ] Relevance — Apakah penting untuk domain?
-  [ ] Testability — Apakah bisa gagal?
-  [ ] Impact — Apakah ada kontribusi jika terjawab?
+  [✔] Clarity — Cukup jelas, tetapi masih terlalu umum dan belum membatasi kondisi spesifik seperti skenario real-time atau lingkungan kompleks.
+  [✔] Measurability — Ada metrik akurasi (±92%–95%), namun hanya satu metrik sehingga evaluasi masih kurang mendalam.
+  [✔] Relevance — Relevan untuk sistem keamanan, tetapi topik face recognition sudah banyak diteliti sehingga kebaruan rendah.
+  [✔] Testability —  Bisa diuji, namun pengujian terbatas pada dataset kecil dan kondisi terkontrol sehingga validitas belum kuat.
+  [ ] Impact — Kontribusi masih terbatas karena skala kecil (hanya 5 orang) dan belum bisa digeneralisasi ke kondisi nyata yang lebih luas.
 
 Problem Statement (1 paragraf):
-  ____________________
+  Sistem keamanan pintu pada lingkungan perbankan masih banyak menggunakan metode konvensional seperti kunci fisik dan kartu akses yang memiliki keterbatasan seperti risiko kehilangan dan ketergantungan pada media fisik. Teknologi face recognition berbasis Convolutional Neural Network (CNN) menawarkan solusi autentikasi biometrik, namun performanya masih dipengaruhi oleh kualitas citra, jumlah dataset, dan variasi kondisi wajah. Oleh karena itu, diperlukan penelitian untuk menganalisis dan meningkatkan akurasi sistem face recognition dalam mengidentifikasi wajah secara optimal pada kondisi dataset terbatas dan variasi kualitas gambar, dengan menggunakan metrik akurasi sebagai indikator utama keberhasilan sistem.
 ```
 
 ---
 
 ## Latihan 1 — Dari Topik ke Masalah Riset
 
-Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Problem Formation Model.
-
-**Topik awal:** ________________________________________
+**Topik awal:** Face Recognition untuk Sistem Keamanan Akses Pintu
 
 | Tahap | Hasil |
 |-------|-------|
-| Reality | *Contoh: Aplikasi e-commerce sering ditinggalkan saat checkout* |
-| Observed Issue (Symptom) | *Contoh: Bounce rate checkout 68%* |
-| Diagnosed Problem (Root Cause) | |
-| Researchable Problem | |
-| Measurable Variable | |
+| Reality | *Sistem keamanan pintu di perbankan masih menggunakan kunci fisik dan kartu akses* |
+| Observed Issue (Symptom) | *Pegawai tidak bisa mengakses pintu jika kartu tertinggal atau hilang* |
+| Diagnosed Problem (Root Cause) | *Sistem autentikasi masih bergantung pada media fisik yang tidak praktis dan rentan* |
+| Researchable Problem | *Belum optimalnya akurasi sistem face recognition berbasis CNN dalam mengidentifikasi wajah pada kondisi dataset terbatas dan variasi kualitas citra* |
+| Measurable Variable | *Akurasi (%), jumlah dataset, kualitas citra (blur/pencahayaan), tingkat keberhasilan identifikasi* |
 
-**Apakah terjebak solution-first thinking?** [ ] Ya / [ ] Tidak
-> Jika ya, kembali ke tahap mana? ________________________
+**Apakah terjebak solution-first thinking?** [ ✔ ] Ya
+> Kembali ke tahap Diagnosed Problem, karena langsung lompat ke solusi (CNN & face recognition) tanpa memperdalam masalah dasar
 
 ---
 
@@ -123,14 +121,19 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
 |----------|----------|
-| Input | *Contoh: Request HTTP dari browser pengguna* |
-| Process | |
-| Output | |
-| Outcome | |
-| Constraints | |
-| Stakeholders | |
+| Input | *Citra wajah pegawai yang ditangkap kamera* |
+| Process | *Akuisisi gambar → preprocessing → ekstraksi fitur → klasifikasi → identifikasi menggunakan CNN* |
+| Output | *Hasil identifikasi wajah* |
+| Outcome | *Akses pintu terbuka otomatis jika wajah dikenali* |
+| Constraints | *Kualitas gambar (blur), pencahayaan, variasi ekspresi wajah, jumlah dataset terbatas* |
+| Stakeholders | *Pegawai bank, pihak manajemen, developer sistem* |
 
-**Komponen mana yang paling relevan dengan masalah riset?** _______________
+**Komponen yang paling relevan dengan masalah riset adalah Process & Constraints.**
+
+Alasanya:
+- Masalah utama ada di proses identifikasi (CNN)
+- Dipengaruhi langsung oleh constraints seperti dataset kecil dan kualitas gambar
+- Di sinilah akurasi sistem ditentukan (inti riset)
 
 ---
 
@@ -140,17 +143,16 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Clarity | *Contoh: 4 — cukup jelas tapi perlu spesifikasi dataset* | |
-| Measurability | | |
-| Relevance | | |
-| Testability | | |
-| Impact | | |
+| Clarity | 4 | Masalah sudah cukup jelas, tetapi masih belum membatasi kondisi spesifik seperti lingkungan real-time atau skala implementasi |
+| Measurability | 3  | Menggunakan akurasi sebagai metrik, namun tidak ada metrik lain seperti precision/recall sehingga evaluasi kurang mendalam |
+| Relevance | 4 | Relevan untuk sistem keamanan modern, tetapi bukan topik baru sehingga kontribusi kebaruan terbatas |
+| Testability | 3 | Bisa diuji, tetapi pengujian hanya pada dataset kecil dan kondisi terbatas sehingga validitas kurang kuat |
+| Impact | 2 | Dampak masih kecil karena belum bisa digeneralisasi ke skala besar |
 
-**Skor total:** _____ / 25
+**Skor total:** 16 / 25
 
-**Problem statement versi final (1 paragraf):**
-> ___________________________________________________
-> ___________________________________________________
+**Problem statement :**
+> Sistem keamanan pintu di lingkungan perbankan masih banyak menggunakan metode konvensional seperti kunci fisik dan kartu akses yang memiliki keterbatasan dalam hal kepraktisan dan keamanan. Penggunaan teknologi face recognition berbasis Convolutional Neural Network (CNN) menawarkan alternatif autentikasi biometrik, namun performanya masih dipengaruhi oleh keterbatasan jumlah dataset, variasi kualitas citra, serta kondisi lingkungan seperti pencahayaan dan ekspresi wajah. Oleh karena itu, diperlukan penelitian untuk mengevaluasi dan meningkatkan akurasi sistem face recognition dalam mengidentifikasi wajah secara tepat pada kondisi dataset terbatas, dengan menggunakan metrik akurasi sebagai indikator utama keberhasilan sistem.
 
 ---
 
@@ -159,5 +161,4 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 > Bandingkan "masalah" yang biasa ditemui saat coding (bug, error) dengan masalah riset. Apa perbedaan fundamental dalam cara mendefinisikan dan mendekati keduanya?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Masalah coding (bug/error) bersifat teknis dan memiliki solusi langsung melalui debugging. Sedangkan masalah riset bersifat kompleks, berfokus pada gap pengetahuan, dan memerlukan analisis serta pembuktian ilmiah. Perbedaannya, coding bertujuan memperbaiki, sedangkan riset bertujuan memahami dan membuktikan.
