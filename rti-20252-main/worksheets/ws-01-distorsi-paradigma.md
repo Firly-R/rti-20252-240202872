@@ -58,58 +58,52 @@ Dalam DSR, artefak **bukan tujuan akhir** — ia adalah instrumen untuk menghasi
 
 ---
 
-## Template A.1 — Research Mindset Self-Assessment
+## A.1 — Research Mindset Self-Assessment
 
 ```
-Nama Peneliti    : ____________________
-Tanggal          : ____________________
+Nama Peneliti    : Muhammad Firly Ramadhan
+Tanggal          : 24 April 2026
 
 1. Ketika membaca klaim "metode X 95% akurat":
-   - Pertanyaan pertama saya: ____________________
-   - Data yang dibutuhkan untuk verifikasi: ____________________
+   - Pertanyaan pertama saya: Apakah akurasi tersebut dihitung dari dataset yang cukup besar dan beragam, serta apakah data training dan testing dipisahkan dengan benar?
+   - Data yang dibutuhkan untuk verifikasi: Dataset yang digunakan, jumlah data, pembagian data (train, validasi, test), serta metrik evaluasi seperti confusion matrix, precision, dan recall.
 
 2. Posisi paradigma:
-   - Pendekatan: [ ] Positivis  [ ] Interpretivis  [ ] Design Science  [ ] Mixed
-   - Alasan: ____________________
+   - Pendekatan: [✔] Positivis  [ ] Interpretivis  [✔] Design Science  [ ] Mixed
+   - Alasan: Penelitian menggunakan pendekatan kuantitatif dengan mengukur performa model melalui akurasi (positivis), serta membangun sistem face recognition sebagai artefak (design science).
 
 3. Identifikasi distorsi:
-   - Asumsi tersembunyi: ____________________
-   - Sumber bias potensial: ____________________
-   - Langkah mitigasi: ____________________
+   - Asumsi tersembunyi: Sistem dianggap akurat dan dapat digunakan secara umum meskipun hanya diuji pada dataset yang terbatas.
+   - Sumber bias potensial: Dataset hanya terdiri dari sedikit individu dan kondisi gambar yang tidak beragam (pencahayaan, blur, sudut wajah).
+   - Langkah mitigasi: Menambah jumlah dataset yang lebih beragam, menggunakan metode evaluasi yang lebih lengkap, serta melakukan pengujian pada data yang benar-benar baru.
 
 4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: ____________________
-   - Batasan yang diakui sejak awal: ____________________
+   - Data yang tidak akan dimanipulasi: Data hasil pengujian termasuk data yang menghasilkan kesalahan (false recognition) tidak akan dihapus atau diubah.
+   - Batasan yang diakui sejak awal: Dataset yang digunakan terbatas dan hasil penelitian belum tentu dapat digeneralisasi ke kondisi dunia nyata yang lebih luas.
 ```
 
 ---
 
 ## Latihan 1 — Identifikasi Distorsi
 
-Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan performa." Telusuri setiap tahap Research Trust Model.
-
-> **Panduan pencarian paper:** Gunakan [IEEE Xplore](https://ieeexplore.ieee.org), [ACM Digital Library](https://dl.acm.org), atau Google Scholar. Pilih paper **tahun 2020 ke atas**, di topik yang Anda minati: deteksi anomali, klasifikasi citra, NLP, keamanan siber, IoT, dsb.
->
-> **Contoh domain TI:** "Deteksi anomali lalu-lintas jaringan menggunakan CNN — akurasi meningkat 94% vs baseline SVM 87%." Distorsi potensial: apakah dataset normal/anomali seimbang? Apakah hanya diuji pada satu vendor traffic?
-
 **Paper yang dipilih:**
-> Judul: _______________________________________________
-> Penulis (Tahun): ______________________________________
-> Sumber/Link DOI: _____________________________________
+> Judul: Face Recognition Untuk Akses Pegawai Bank Menggunakan Deep Learning 
+Dengan Metode CNN.
+> Penulis (Tahun): Muhammad Arsal, Bheta Agus Wardijono, Dina Anggraini (2020)
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
-| Reality → Data | *Contoh: Kumpulkan log server 30 hari* | *Contoh: Hanya ambil jam sibuk* |
-| Data → Processing | | |
-| Processing → Analysis | | |
-| Analysis → Inference | | |
-| Inference → Knowledge | | |
+| Reality → Data | Mengambil data wajah pegawai bank (5 orang) | Dataset sangat kecil dan tidak representatif |
+| Data → Processing | Preprocessing (grayscale, cropping, dll) | Kualitas gambar berbeda (blur, pencahayaan) |
+| Processing → Analysis | Training CNN (VGG16) dengan data train, validasi, test | Overfitting karena data sedikit |
+| Analysis → Inference | Menghasilkan akurasi 92%–95% | Hanya pakai akurasi, tidak pakai precision/recall |
+| Inference → Knowledge | Menyimpulkan sistem berhasil digunakan di bank | Generalisasi berlebihan (belum diuji di lingkungan lain) |
 
-**Distorsi paling besar di tahap:** ________________________
+**Distorsi paling besar di tahap:** Dataset terlalu kecil dan tidak beragam
 
 **Dua distorsi spesifik yang teridentifikasi:**
-1. ___________________________________________________
-2. ___________________________________________________
+1. Dataset hanya terdiri dari 5 orang
+2. Kualitas gambar mempengaruhi hasil (blur menyebabkan gagal identifikasi)
 
 ---
 
@@ -119,29 +113,30 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 
 | Perspektif | Analisis |
 |------------|---------|
-| Kejujuran ilmiah | *Contoh: Laporkan kedua versi (dengan dan tanpa outlier)* |
-| Transparansi | |
-| Peer review | |
+| Kejujuran ilmiah | Harus melaporkan hasil dengan dan tanpa outlier |
+| Transparansi | Menjelaskan alasan penghapusan outlier |
+| Peer review | Reviewer akan mempertanyakan manipulasi data |
 
 **Keputusan akhir dan justifikasi:**
-> ___________________________________________________
+> Data tidak boleh dihapus sembarangan. Peneliti harus melaporkan kedua kondisi dan menjelaskan alasan keberadaan outlier.
 
 ---
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** ________________________________________
+**Topik riset:** Face Recognition menggunakan CNN
 
 > **Skala 1–5:** 1 = tidak sesuai sama sekali dengan topik ini, 5 = sangat sesuai dan dominan digunakan pada riset bertopik serupa.
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | *Contoh: 4 — topik kuantitatif, cocok uji hipotesis* | *Contoh: 2 — topik tidak studi makna/konteks* | *Contoh: 5 — membangun artefak untuk uji klaim* |
-| Jenis data yang dikumpulkan | *Metrik numerik, log eksperimen* | *Wawancara, observasi kualitatif* | *Hasil uji artefak, komparasi kinerja* |
-| Limitasi paradigma | | | |
+| Kesesuaian dengan topik (1–5) | 5 | 1 | 4 |
+| Jenis data yang dikumpulkan | *Akurasi, Data set* | *-* | *Hasil sistem* |
+| Limitasi paradigma | *Terlalu fokus angka* | *Tidak cocok* | *Fokus ke artefak* |
 
-**Paradigma yang dipilih:** _____________________________
-**Alasan:** ____________________________________________
+**Paradigma yang dipilih:** Positivis + Design Science.
+
+**Alasan:** Karena penelitian menguji akurasi sekaligus membangun sistem.
 
 ---
 
@@ -150,5 +145,5 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 > Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Sebelum mempelajari materi ini, saya cenderung langsung percaya pada klaim akurasi yang tinggi. Namun setelah memahami adanya potensi distorsi, saya akan mempertanyakan ukuran dataset, metode evaluasi, serta apakah hasil tersebut dapat digeneralisasi ke kondisi lain.
+
