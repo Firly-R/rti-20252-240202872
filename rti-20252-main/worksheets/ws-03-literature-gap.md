@@ -76,40 +76,45 @@ Membandingkan deep learning 2024 dengan decision tree sederhana tanpa justifikas
 
 LITERATURE MAPPING
 
-Topik      : ____________________
-Database   : ____________________
-Query      : ____________________
-Tahun      : ____________________
-Hasil awal : ____ paper → Screening → ____ paper final
+* Topik      : Face Recognition berbasis Deep Learning untuk sistem identifikasi wajah
+* Database   : Google Scholar
+* Query      : (“face recognition” OR “face detection”) AND (“CNN” OR “FaceNet” OR “MTCNN”)
+* Tahun      : 2023-2025
+* Hasil awal : 10 paper → Screening → 5 paper final
 
 Literature Matrix (concept-centric):
 
 | Study | Tahun | Method | Data | Result | Limitation |
 |-------|-------|--------|------|--------|------------|
-|       |       |        |      |        |            |
+|Khan et al.|2023|CNN(Improved MTCNN|Face detection dataset|Deteksi lebih akurat|Komputasi tinggi|
+|He et al.|2023|CNN & Transformer|Face dataset|Lebih efisien & akurat|Kompleks|
+|Xiao et al.|2023|MTCNN & CNN|Sistem pendidikan|Respon cepat|Terbatas kondisi|
+|Khalifa et al.|2024|CNN & Attention|Face verification|Lebih robust|Model kompleks|
+|Sharma et al.|2024|MTCNN & FaceNet|Sistem realtime|Akurasi tinggi|Bergantung kualitas citra|
 
-Pola yang ditemukan:
-  Metode dominan     : ____________________
-  Dataset umum       : ____________________
-  Limitasi berulang  : ____________________
+### Pola yang ditemukan:
+* Metode dominan     : Pendekatan berbasis Convolutional Neural Network (CNN) dengan pengembangan seperti CNN + Attention dan CNN + Transformer
+* Dataset umum       : Dataset citra wajah dengan variasi terbatas, umumnya digunakan dalam konteks sistem real-time seperti pendidikan dan keamanan
+* Limitasi berulang  : Ketergantungan pada kualitas citra (pencahayaan, pose), kurangnya robustness pada kondisi real-world, serta meningkatnya kompleksitas dan kebutuhan komputasi
 
-GAP IDENTIFICATION
+### GAP IDENTIFICATION
 
-Gap 1: [Jenis: performance / method / data / context]
-  Deskripsi    : ____________________
-  Bukti        : ____________________
-  Signifikansi : ____________________
+#### Gap 1: [Jenis: performance ]
+* Deskripsi    : Meskipun metode semakin kompleks (attention, transformer), sistem masih belum robust terhadap kondisi real-world seperti pencahayaan, pose, dan kualitas citra.
+* Bukti        : Performa bergantung pada kualitas citra(Sharma et al.), sistem terbatas pada kondisi tertentu(Xiao et al.), Perlu model lebih kompleks untuk meningkatkan robustness(Khalifa et al.)
+* Signifikansi : Keterbatasan ini menyebabkan sistem face recognition tidak dapat bekerja secara optimal dalam kondisi nyata, sehingga mengurangi keandalan pada aplikasi seperti keamanan dan sistem real-time.
 
-Gap 2: [Jenis: ____]
-  Deskripsi    : ____________________
-  Bukti        : ____________________
-  Signifikansi : ____________________
+#### Gap 2: [Jenis: Complexity / Method]
+* Deskripsi    : Peningkatan performa model diikuti dengan meningkatnya kompleksitas arsitektur dan kebutuhan komputasi yang tinggi.
+* Bukti        : Membutuhkan komputasi tinggi(Khan et al.), model CNN + Transformer lebih kompleks(He et al.), arsitektur lebih berat(Khalifa et al.)
+* Signifikansi : Kompleksitas yang tinggi membatasi implementasi sistem pada perangkat dengan sumber daya terbatas, seperti sistem embedded atau aplikasi real-time.
 
 Baseline Selection:
 | Baseline | Relevansi | Representatif | Source |
 |----------|-----------|---------------|--------|
-|          |           |               |        |
-
+|HaarCascade|Pengembangan metode deteksi wajah dari MTCNN untuk meningkatkan akurasi|Representasi deteksi wajah modern|Khan et al. (2023)|
+|Attention-based CNN|Pengembangan CNN untuk meningkatkan akurasi dan robustness face recognition|Representasi CNN modern (state-of-the-art)|Khalifa et al.(2024)|
+|MTCNN + Enhanced FaceNet|Kombinasi deteksi dan recognition modern dengan peningkatan fitur (attention)|Representasi pipeline terbaru|Karamizadeh et al.(2025)|
 
 ---
 
@@ -122,20 +127,23 @@ Gunakan topik riset dari WS-02. Cari minimal 5 paper relevan menggunakan databas
 > - Tulis query Boolean yang digunakan: contoh `("object detection" OR "image classification") AND ("edge computing") NOT ("medical")`. Dokumentasikan query secara eksplisit.
 > - Akses gratis: buka Google Scholar → cari judul paper → klik [PDF] jika tersedia, atau akses lewat campus VPN
 
-**Topik riset:** ________________________________________
-**Query pencarian:** ____________________________________
-**Database:** ___________________________________________
+**Topik riset:** Face Recognition berbasis Deep Learning untuk sistem identifikasi wajah
+
+**Query pencarian:** ("face recognition" OR "face detection") AND ("CNN" OR "FaceNet" OR "MTCNN") NOT ("medical")
+
+**Database:** Google Scholar
 
 | # | Study | Tahun | Method | Dataset | Result | Limitasi |
 |---|-------|-------|--------|---------|--------|----------|
-| 1 | *Contoh: Rahman et al.* | *2023* | *CNN* | *ImageNet subset* | *Acc 91%* | *Hanya 3 kelas* |
-| 2 | | | | | | |
-| 3 | | | | | | |
-| 4 | | | | | | |
-| 5 | | | | | | |
+| 1 | Soumya Suvra Khan, Md. Ashraful Islam, Md. Alamin Hossain | 2023 | Improved MTCNN(CNN) | WIDER FACE | Deteksi lebih akurat | Komputasi tinggi |
+| 2 | Yu Xiao, Xiaofei Zhang, Li Wang | 2023 | MTCNN + CNN | Dataset pendidikan | Respon cepat | Terbatas kondisi |
+| 3 | Ahmed Fawzy Khalifa, Mohamed Elhoseny, Aboul Ella Hassanien | 2024 | CNN + Attention | Face dataset | Akurasi meningkat | Model kompleks |
+| 4 | Md. Rabiul Islam, Md. Al Mehedi Hasan, Tanzir Mahmud | 2024 | CNN-based Face recognition | Face dataset | Performa tinggi | Sensitif terhadap kualitas citra |
+| 5 | S. Karamizadeh, A. Shamsinejad, M. H. Moattar | 2025 | MTCNN + FaceNet(Enhanced) | Real-world dataset | Lebih robust | Komputasi tinggi |
 
-**Pola yang terlihat — Metode dominan:** ___________________
-**Limitasi yang berulang:** ______________________________
+**Pola yang terlihat — Metode dominan:** Deep Learning berbasis CNN dengan pengembangan seperti Attention dan kombinasi metode
+
+**Limitasi yang berulang:** Ketergantungan pada kualitas citra (pose, pencahayaan), serta meningkatnya kompleksitas dan kebutuhan komputasi
 
 ---
 
@@ -145,28 +153,26 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 
 | Jenis Gap | Ditemukan? | Gap Statement |
 |-----------|-----------|---------------|
-| Performance Gap | [ ] Ya / [ ] Tidak | *Contoh: Akurasi turun di bawah 80% untuk kelas minoritas* |
-| Method Gap | [ ] Ya / [ ] Tidak | |
-| Data Gap | [ ] Ya / [ ] Tidak | |
-| Context Gap | [ ] Ya / [ ] Tidak | |
+| Performance Gap | [✅] Ya | Performa sistem face recognition masih menurun pada kondisi real-world seperti pencahayaan rendah, variasi pose, dan kualitas citra yang buruk |
+| Method Gap | [✅] Ya | Metode berbasis CNN masih memiliki keterbatasan dalam menangkap fitur global sehingga memerlukan pengembangan seperti attention dan transformer |
+| Data Gap | [✅] Ya | Dataset yang digunakan masih terbatas dan belum sepenuhnya merepresentasikan kondisi dunia nyata yang beragam |
+| Context Gap | [✅] Ya | Sebagian besar penelitian hanya diuji pada kondisi terkontrol dan belum banyak diterapkan pada lingkungan real-time yang kompleks |
 
-**Gap utama yang dipilih:** _____________________________
+**Gap utama yang dipilih:** Performance Gap (Robustness terhadap kondisi real-world)
 **Mengapa gap ini penting (bukan sekadar "belum ada yang meneliti")?**
-> ___________________________________________________
+> Gap ini penting karena secara langsung mempengaruhi keberhasilan sistem face recognition dalam penggunaan nyata. Meskipun metode yang digunakan semakin kompleks, performa sistem masih sangat bergantung pada kondisi input seperti pencahayaan, pose, dan kualitas citra. Hal ini menyebabkan sistem kurang andal ketika diterapkan di lingkungan real-world, sehingga perlu dikembangkan metode yang lebih robust agar dapat bekerja secara konsisten dalam berbagai kondisi.
 
 ---
 
 ## Latihan 3 — Baseline Selection
 
-Pilih 2 baseline dari literatur yang sudah dibaca.
-
 | # | Baseline | Mengapa Relevan | Mengapa Representatif | Apakah SOTA? | Sumber |
 |---|----------|----------------|----------------------|-------------|--------|
-| 1 | *Contoh: RF + TF-IDF* | *Task sama: klasifikasi teks* | *Dipakai 6 dari 10 paper* | *Bukan, tapi common practice* | *Lee et al., 2022* |
-| 2 | | | | | |
+| 1 | MTCNN (Improved MTCNN) | Digunakan untuk face detection pada task yang sama | Banyak digunakan dalam penelitian face recognition terbaru | Bukan, tetapi masih umum digunakan | Soumya Suvra Khan, Md. Ashraful Islam, Md. Alamin Hossain (2023) |
+| 2 | CNN + Attention | Digunakan untuk meningkatkan akurasi face recognition | Mewakili perkembangan metode modern berbasis CNN | Ya (mendekati SOTA) | Ahmed Fawzy Khalifa, Mohamed Elhoseny, Aboul Ella Hassanien (2024) |
 
-**Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [ ] Tidak
-> Justifikasi: ________________________________________
+**Apakah pemilihan baseline ini bisa dianggap straw man?** [❌] Tidak
+> Justifikasi: Baseline yang dipilih mencakup metode yang umum digunakan (MTCNN) dan metode yang lebih modern (CNN + Attention), sehingga perbandingan yang dilakukan tetap adil dan representatif terhadap perkembangan penelitian saat ini.
 
 ---
 
@@ -175,5 +181,6 @@ Pilih 2 baseline dari literatur yang sudah dibaca.
 > Apa perbedaan antara "belum ada yang meneliti ini" (klaim tanpa bukti) dengan research gap yang valid? Bagaimana cara membuktikan bahwa sebuah gap benar-benar ada?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Perbedaan antara klaim “belum ada yang meneliti ini” dengan research gap yang valid adalah bahwa research gap harus didukung oleh bukti dari beberapa penelitian sebelumnya. Klaim tanpa bukti hanya bersifat asumsi, sedangkan research gap yang valid diperoleh melalui analisis literatur yang menunjukkan adanya keterbatasan atau masalah yang konsisten.
+
+> Cara membuktikan bahwa sebuah gap benar-benar ada adalah dengan menunjukkan pola yang sama dari beberapa penelitian, seperti limitasi yang berulang atau hasil yang belum optimal pada kondisi tertentu. Dengan demikian, gap tersebut bukan hanya opini, tetapi didasarkan pada temuan ilmiah yang dapat dipertanggungjawabkan.
