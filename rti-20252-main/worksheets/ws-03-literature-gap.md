@@ -72,9 +72,8 @@ Membandingkan deep learning 2024 dengan decision tree sederhana tanpa justifikas
 
 ---
 
-## Template A.3 — Literature Mapping & Gap Identification
+## A.3 — Literature Mapping & Gap Identification
 
-```
 LITERATURE MAPPING
 
 Topik      : ____________________
@@ -110,7 +109,7 @@ Baseline Selection:
 | Baseline | Relevansi | Representatif | Source |
 |----------|-----------|---------------|--------|
 |          |           |               |        |
-```
+
 
 ---
 
