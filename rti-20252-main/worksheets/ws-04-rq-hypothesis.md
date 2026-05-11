@@ -157,7 +157,7 @@ Perbedaan 10% dianggap cukup signifikan untuk menunjukkan peningkatan efisiensi 
 | Baseline | *Ya* | Fixed probability |
 | Dataset/konteks | *Ya* | Sistem gacha game dengan pity system |
 
-**Tipe RQ:** [x] Comparison
+**Tipe RQ:** Comparison
 
 **RQ versi revisi (setelah evaluasi):**
 > Apakah weighted probability pada sistem pity gacha menghasilkan expected pull rate yang lebih efisien dibanding fixed-probability gacha?
@@ -176,7 +176,8 @@ Rumuskan pasangan hipotesis dari RQ di Latihan 1.
 | Threshold | *≥ 10% peningkatan efisiensi* |
 | Justifikasi threshold | *Menunjukkan peningkatan probabilitas yang cukup signifikan dalam simulasi sistem gacha* |
 
-**Apakah hipotesis ini falsifiable?** [x] Ya / [ ] Tidak
+**Apakah hipotesis ini falsifiable?** 
+Ya 
 > Bagaimana cara membuktikannya salah?
 > melakukan simulasi probabilitas dan menunjukkan bahwa weighted probability tidak menghasilkan peningkatan efisiensi dibanding fixed probability.
 
@@ -195,7 +196,7 @@ Lengkapi rantai dari RQ hingga metode analisis.
 | Data source | *Simulasi probabilitas berdasarkan model jurnal* |
 | Analysis method | *Analisis probabilistik dan perbandingan statistik* |
 
-**Apakah rantai lengkap?** [x] Ya / [ ] Tidak
+**Apakah rantai lengkap?** Ya 
 
 ---
 
