@@ -61,25 +61,30 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 
 ---
 
-## Template A.5 — Definisi Variabel, Metrik & Justifikasi
+## A.5 — Definisi Variabel, Metrik & Justifikasi
 
-```
-VARIABLE & METRIC DEFINITION
+## VARIABLE & METRIC DEFINITION
 
-Research Question: ____________________
+### Research Question
+Bagaimana algoritma Weighted Probability memengaruhi peluang memperoleh item rare pada sistem gacha game?
 
 | Variabel | Tipe | Konsep | Metrik | Skala | Satuan | Cara Mengukur | Justifikasi |
-|----------|------|--------|--------|-------|--------|---------------|-------------|
-|          | IV   |        |        |       |        |               |             |
-|          | DV   |        |        |       |        |               |             |
-|          | CV   |        |        |       |        |               |             |
+|----------|------|--------|--------|--------|--------|----------------|-------------|
+| Weighted Probability | IV | Algoritma pengaturan peluang item | Nilai drop rate per pull | Ratio | % | Menghitung perubahan probabilitas tiap pull | Weighted probability merupakan inti sistem probabilitas pada gacha modern |
+| Jumlah Pull | IV | Banyaknya percobaan gacha | Pull ke-1, ke-2, dst | Ratio | Pull | Menghitung total percobaan pemain | Jumlah pull memengaruhi perubahan probabilitas |
+| Peluang Item Rare | DV | Output probabilitas sistem | Cumulative probability rare item | Ratio | % | Menghitung peluang total memperoleh rare item | Digunakan untuk mengukur efektivitas algoritma |
+| Pity Threshold | CV | Batas jaminan rare item | Maksimum pull sebelum guaranteed | Ratio | Pull | Menentukan batas pity system | Digunakan untuk mengontrol distribusi probabilitas |
+| Base Probability | CV | Peluang awal rare item | Drop rate awal | Ratio | % | Mengambil nilai probabilitas awal | Digunakan sebagai pembanding weighted probability |
 
-Alignment Check:
-  RQ → Concept → Variable → Metric → Data → Result
-  [ ] Setiap langkah terdokumentasi
-  [ ] Tidak ada "lompatan logis"
-  [ ] Metrik mengukur apa yang dimaksud (construct validity)
-```
+---
+
+# Alignment Check
+
+Problem → Concept → Variable → Metric → Data → Result
+
+- [x] Setiap langkah terdokumentasi
+- [x] Tidak ada lompatan logis
+- [x] Metrik sesuai dengan konsep yang diukur
 
 ---
 
@@ -87,16 +92,20 @@ Alignment Check:
 
 Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 
-**RQ:** __________________________________________________
+**RQ:** Bagaimana algoritma Weighted Probability memengaruhi peluang memperoleh item rare pada sistem gacha game?
 
 | Variabel | Tipe | Konsep Abstrak | Metrik Konkret | Skala (NOIR) | Satuan |
 |----------|------|---------------|----------------|-------------|--------|
-| *Contoh: Jenis model* | *IV* | *Pendekatan klasifikasi* | *Categorical: CNN vs RF* | *Nominal* | *—* |
-| | DV | | | | |
-| | CV | | | | |
+| Weighted Probability | IV | Sistem probabilitas dinamis | Persentase perubahan drop rate | Ratio | % |
+| Jumlah Pull | IV | Percobaan gacha | Banyaknya pull | Ratio | Pull |
+| Peluang Item Rare | DV | Keberhasilan sistem | Cumulative probability | Ratio | % |
+| Pity Threshold | CV | Sistem jaminan rare item | Maksimum pull pity | Ratio | Pull |
+| Base Probability | CV | Probabilitas awal | Drop rate awal | Ratio | % |
 
-**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [ ] Tidak
-> Jika ya, di mana? ____________________________________
+---
+
+**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [x] Tidak
+> Tidak ada lompatan logis karena setiap tahapan penelitian saling terhubung secara jelas, mulai dari konsep Weighted Probability, variabel probabilitas gacha, metrik cumulative probability, data perubahan drop rate, hingga hasil berupa peluang memperoleh item rare.
 
 ---
 
@@ -106,15 +115,18 @@ Evaluasi metrik DV yang dipilih di Latihan 1 menggunakan 3 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Representative | *Contoh: 4 — F1-Score mewakili keseimbangan precision-recall* | |
-| Sensitive | | |
-| Feasible | | |
+| Representative | 5 | *Cumulative probability secara langsung merepresentasikan peluang memperoleh item rare pada algoritma Weighted Probability.* |
+| Sensitive | 4 | *Metrik cukup sensitif karena perubahan kecil pada drop rate atau pity system dapat memengaruhi cumulative probability.* |
+| Feasible | 5 | *Data probabilitas dan jumlah pull mudah diperoleh melalui simulasi maupun dokumentasi sistem gacha.* |
 
-**Apakah perlu secondary metric?** [ ] Ya / [ ] Tidak
-> Jika ya, apa dan mengapa? _____________________________
+---
+
+**Apakah perlu secondary metric?** [x] Ya / [ ] Tidak
+> Jika ya, apa dan mengapa? *Secondary metric yang digunakan adalah jumlah pull rata-rata hingga memperoleh item rare. Metrik ini digunakan untuk mendukung cumulative probability agar hasil analisis lebih mudah dipahami dalam konteks implementasi sistem gacha.*
+
 
 **Contoh kasus ceiling effect untuk metrik ini:**
-> ___________________________________________________
+> *Ceiling effect dapat terjadi ketika pity system mencapai guaranteed rare item, misalnya pada pull ke-90 peluang rare item menjadi 100%. Pada kondisi tersebut cumulative probability tidak lagi menunjukkan variasi performa algoritma karena semua pemain pasti memperoleh rare item.*
 
 ---
 
@@ -124,10 +136,10 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 
 | Dimensi | Pertanyaan | Jawaban | Strategi Mitigasi |
 |---------|-----------|---------|------------------|
-| Completeness | *Apakah semua data point terkumpul?* | | |
-| Consistency | *Apakah ada kontradiksi internal?* | | |
-| Validity | *Apakah benar-benar mengukur yang dimaksud?* | | |
-| Representativeness | *Apakah sampel mewakili populasi target?* | | |
+| Completeness | Apakah semua data point terkumpul? | Data probabilitas, jumlah pull, dan perubahan drop rate dapat terkumpul secara lengkap melalui simulasi algoritma gacha. | Menggunakan simulasi otomatis agar seluruh data pull tercatat tanpa ada data yang hilang. |
+| Consistency | Apakah ada kontradiksi internal? | Kemungkinan terdapat inkonsistensi jika nilai cumulative probability tidak sesuai dengan perubahan drop rate pada setiap pull. | Memvalidasi hasil perhitungan probabilitas menggunakan rumus dan pengecekan ulang pada setiap tahap simulasi. |
+| Validity | Apakah benar-benar mengukur yang dimaksud? | Data yang dikumpulkan benar-benar mengukur efektivitas algoritma Weighted Probability terhadap peluang rare item. | Menggunakan metrik cumulative probability dan jumlah pull yang langsung berkaitan dengan sistem probabilitas gacha. |
+| Representativeness | Apakah sampel mewakili populasi target? | Sampel berupa simulasi pull mewakili mekanisme umum sistem gacha modern yang menggunakan weighted probability dan pity system. | Menggunakan parameter probabilitas yang umum digunakan pada game gacha seperti Genshin Impact agar hasil lebih representatif. |
 
 ---
 
@@ -136,5 +148,6 @@ Bayangkan data yang akan dikumpulkan dari eksperimen. Evaluasi 4 dimensi kualita
 > Mengapa memilih metrik setelah melihat data dianggap p-hacking? Apa bedanya dengan eksplorasi data yang sah?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Memilih metrik setelah melihat data dianggap p-hacking karena peneliti bisa memilih metrik yang paling mendukung hasil yang diinginkan, sehingga penelitian menjadi bias dan kurang valid.
+
+> Sedangkan eksplorasi data yang sah dilakukan untuk mencari pola atau insight tambahan tanpa mengubah metrik utama yang sudah ditentukan sejak awal. Hasil eksplorasi dilaporkan sebagai temuan tambahan, bukan bukti utama penelitian.
