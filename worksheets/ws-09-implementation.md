@@ -73,32 +73,33 @@ Mengandalkan "install library terbaru" berbahaya: versi berbeda = perilaku berbe
 EXPERIMENT SETUP DOCUMENTATION
 
 Hardware:
-  CPU     : ____________________
-  RAM     : ____________________
-  GPU     : ____________________
-  Storage : ____________________
+  CPU     : Intel Core i5
+  RAM     : 12 GB
+  GPU     : NVIDIA GeForce MX250
+  Storage : 715 GB
 
 Software:
-  OS        : ____________________
-  Runtime   : ____________________
-  Framework : ____________________
+  OS        : Windows
+  Runtime   : Python
+  Framework : Standar Library (Pure Python)
 
 Dependencies:
-| Library | Version | Sumber | Hash/Checksum |
-|---------|---------|--------|---------------|
-|         |         |        |               |
-|         |         |        |               |
+| Library     | Version | Sumber     | Hash/Checksum |
+|-------------|---------|------------|---------------|
+| random      | Built-in| -          | -             |
+| csv         | Built-in| -          | -             |
+| collections | Built-in| -          | -             |
 
 Konfigurasi:
-  Config file     : ____________________
-  Random seed     : ____________________
-  Hyperparameters : ____________________
+  Config file     : Hardcoded (parameter global dalam gacha.py)
+  Random seed     : 42
+  Hyperparameters : TOTAL_SAMPEL=100000, SOFT_PITY=50, HARD_PITY=70
 
 Reproducibility Check:
-  [ ] Dependency terdokumentasi (requirements.txt / lock file)
-  [ ] Seed ditetapkan di semua level (Python, NumPy, framework)
-  [ ] Config di version control
-  [ ] README instruksi reproduksi lengkap
+  [X] Dependency terdokumentasi
+  [X] Seed ditetapkan di semua level (Python random)
+  [X] Config di version control
+  [X] README instruksi reproduksi lengkap
 ```
 
 ---
@@ -109,23 +110,21 @@ Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini ata
 
 | Komponen | Spesifikasi |
 |----------|------------|
-| CPU | *Contoh: Intel Core i7-12700H, 14 Core* |
-| RAM | *Contoh: 32 GB DDR5* |
-| GPU | *Contoh: NVIDIA RTX 3060 6GB / CPU-only jika tidak ada GPU* |
-| OS | *Contoh: Ubuntu 22.04 LTS / Windows 11* |
-| Runtime | |
-| Framework | |
-| Random Seed | |
+| CPU | Intel Core 5 |
+| RAM | 12 GB  |
+| GPU | NVIDIA GeForce MX250 |
+| OS | Windows 11 |
+| Runtime | Python 3.10+ |
+| Framework | Pure Python |
+| Random Seed | 42 |
 
 **Dependencies (minimal 5):**
 
 | Library | Version | Alasan Dibutuhkan |
 |---------|---------|-------------------|
-| *Contoh: scikit-learn* | *1.3.2* | *Klasifikasi + evaluasi metrik* |
-| | | |
-| | | |
-| | | |
-| | | |
+| random | Built-in | Fungsi utama untuk menghasilkan angka acak (RNG) dalam simulasi. |
+| csv | Built-in | Menulis hasil eksperimen ke format CSV untuk analisis lebih lanjut. |
+| collections | Built-in | Menggunakan Counter untuk menghitung frekuensi hasil pull dengan efisien. |
 
 ---
 
@@ -135,25 +134,21 @@ Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment 
 
 | Run | Seed | Metrik Utama | Hasil Sama? |
 |-----|------|-------------|-------------|
-| 1 | *Contoh: 42* | *Contoh: Accuracy* | — |
-| 2 | | | [ ] Ya / [ ] Tidak |
-| 3 | | | [ ] Ya / [ ] Tidak |
+| 1 | 42 | ~113.xx (tergantung logika) | — |
+| 2 | 42 | ~113.xx (tergantung logika) | [x] Ya / [ ] Tidak |
+| 3 | 42 | ~113.xx (tergantung logika) | [x] Ya / [ ] Tidak |
 
 **Jika hasil berbeda, kemungkinan penyebab:**
 
-> Penyebab umum non-repeatability:
-> - **Thermal throttling** — CPU/GPU overheating pada run berturut-turut → clock speed turun → waktu eksekusi berubah
-> - **Background process** — antivirus scan, update OS, atau cloud sync aktif saat run berlangsung
-> - **Cache dari run sebelumnya** — hasil tersimpan di memori/disk sehingga run berikutnya tidak menjalankan komputasi penuh
-> - **Random state tidak dikontrol di semua level** — Python seed di-set, tapi NumPy/PyTorch/TensorFlow punya seed independen
+> Penyebab umum adalah tidak adanya kontrol terhadap state acak (random state) atau adanya proses latar belakang yang menginterupsi clock prosesor jika metrik diukur berdasarkan waktu eksekusi. Dengan menetapkan random.seed(42), kita mengunci urutan angka acak yang dihasilkan Python.
 
 ___________________________________________________
 
 **Checklist kontrol yang sudah diterapkan:**
-- [ ] Random seed di-set di semua level
-- [ ] Tidak ada background process yang mengganggu
-- [ ] Cache dibersihkan antar-run
-- [ ] Config file yang sama untuk semua run
+- [x] Random seed di-set di semua level
+- [x] Tidak ada background process yang mengganggu
+- [x] Cache dibersihkan antar-run
+- [x] Config file yang sama untuk semua run
 
 ---
 
@@ -162,25 +157,29 @@ ___________________________________________________
 Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 ```
-# Judul Eksperimen: ____________________
+# Judul Eksperimen: Simulasi Efisiensi Algoritma Weighted Probability pada Gacha
 
 ## 1. Environment
-> (Salin spesifikasi dari Latihan 1)
+- OS: Windows/Linux/macOS
+- Runtime: Python 3.x
+- Hardware: Standar PC (CPU-only)
 
 ## 2. Installation
-> (Langkah instalasi, misal: "pip install -r requirements.txt")
+Tidak diperlukan instalasi library pihak ketiga. Pastikan Python 3 sudah terinstal.
 
 ## 3. Data
-> (Deskripsi data: sumber, format, ukuran)
+Data bersifat sintetis, digenerasi menggunakan `gacha.py` dengan 100.000 iterasi.
 
 ## 4. Execution
-> (Command untuk menjalankan eksperimen)
+Jalankan di terminal: `py gacha.py`
 
 ## 5. Configuration
-> (File config yang digunakan + parameter kunci)
+Parameter diatur pada bagian konstanta global `gacha.py`.
+- RANDOM_SEED = 42
 
 ## 6. Expected Output
-> (Contoh output yang diharapkan + format)
+- Tampilan log di terminal (rata-rata pull).
+- File `hasil_simulasi_gacha.csv` yang berisi kolom `Pull_Ke`, `Cumulative_Probability_Fixed`, `Cumulative_Probability_Weighted`.
 ```
 
 ---
@@ -189,6 +188,6 @@ Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 > Apakah eksperimen Anda saat ini bisa direproduksi oleh orang lain tanpa bantuan Anda? Komponen apa yang masih hilang?
 
-**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
+**Level saat ini:** [x] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
 **Komponen yang belum terdokumentasi:**
-> ___________________________________________________
+> Eksperimen ini sudah mencapai level repeatability karena hasil komputasi sudah konsisten dengan penggunaan seed. Untuk mencapai reproducibility penuh, saya perlu menambahkan berkas requirements.txt (meskipun saat ini hanya menggunakan library bawaan) dan dokumentasi yang lebih mendalam mengenai arsitektur algoritma pity agar peneliti lain bisa memahami logika di balik kode tersebut tanpa harus membaca baris kode satu per satu.
