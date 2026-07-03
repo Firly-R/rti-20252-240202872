@@ -75,31 +75,39 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 
 ---
 
-## Template A.6 — Mapping RQ ke Arsitektur Sistem
+## A.6 — Mapping RQ ke Arsitektur Sistem
 
-```
-SYSTEM-EXPERIMENT MAPPING
+### SYSTEM-EXPERIMENT MAPPING
+Research Question: Bagaimana sistem simulasi gacha dapat digunakan untuk menguji pengaruh algoritma Weighted Probability terhadap peluang memperoleh item rare?
 
-Research Question: ____________________
+---
 
-Variable → Component Mapping:
+### Variable → Component Mapping:
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi/Pengukuran |
 |----------|------|-----------------|---------------------------|
-|          | IV   |                 |                           |
-|          | DV   |                 |                           |
-|          | CV   |                 |                           |
+| Weighted Probability | IV | Probability Engine | Mengubah nilai drop rate tiap pull |
+| Jumlah Pull | IV | Pull Counter Module | Mengatur jumlah simulasi pull |
+| Peluang Item Rare | DV | Probability Calculator | Menghitung cumulative probability rare item |
+| Pity Threshold | CV | Pity System Config | Mengatur batas guaranteed rare |
+| Base Probability | CV | Initial Probability Config | Mengatur probabilitas awal rare item |
 
-4 Prinsip Desain:
-  [ ] Traceability — Setiap komponen bisa ditelusuri ke variabel
-  [ ] Variable Isolation — IV bisa diubah tanpa mengubah CV
-  [ ] Measurement Integration — Pengukuran DV built-in
-  [ ] Reproducibility — Setup bisa direkonstruksi
+---
 
-Experimental Setup:
-  Input data     : ____________________
-  Parameter      : ____________________
-  Output format  : ____________________
-```
+## 4 Prinsip Desain:
+  - [x] Traceability — Setiap komponen bisa ditelusuri ke variabel
+  - [x] Variable Isolation — IV bisa diubah tanpa mengubah CV
+  - [x] Measurement Integration — Pengukuran DV built-in
+  - [x] Reproducibility — Setup bisa direkonstruksi
+
+---
+
+## Experimental Setup:
+
+| Komponen | Detail |
+|-----------|--------|
+| Input Data | Nilai base probability, pity threshold, jumlah pull |
+| Parameter | Drop rate, kenaikan probability, jumlah simulasi |
+| Output Format | Tabel cumulative probability dan hasil rare item |
 
 ---
 
@@ -107,16 +115,20 @@ Experimental Setup:
 
 Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
-**RQ:** __________________________________________________
+**RQ:**  Bagaimana algoritma Weighted Probability memengaruhi peluang memperoleh item rare pada sistem gacha game?
+
 
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
 |----------|------|-----------------|---------------------------|
-| *Contoh: Jenis model* | *IV* | *Modul classifier (swap RF ↔ CNN)* | *Ganti config `model_type`* |
-| | DV | | |
-| | CV | | |
+| Weighted Probability | IV | Probability Engine | Mengubah konfigurasi drop rate |
+| Jumlah Pull | IV | Pull Simulation Module | Mengubah jumlah percobaan pull |
+| Peluang Item Rare | DV | Result Logger | Menghitung cumulative probability |
+| Pity Threshold | CV | Config File | Menentukan batas pity |
+| Base Probability | CV | Config File | Menentukan probabilitas awal |
 
-**Apakah semua variabel bisa di-map?** [ ] Ya / [ ] Tidak
-> Jika tidak, komponen apa yang perlu ditambahkan? _________
+---
+
+**Apakah semua variabel bisa di-map?** [x] Ya / [ ] Tidak
 
 ---
 
@@ -126,14 +138,18 @@ Evaluasi desain sistem terhadap 4 prinsip.
 
 | Prinsip | Status | Bukti / Penjelasan |
 |---------|--------|-------------------|
-| Traceability | *Contoh: ✅ — setiap modul punya label variabel* | |
-| Modularity | | |
-| Controllability | | |
-| Measurability | | |
+| Traceability | ✅ | Setiap modul terhubung langsung dengan variabel penelitian |
+| Modularity | ✅ | Probability Engine dan Pity System dipisahkan |
+| Controllability | ✅ | Parameter disimpan pada config file |
+| Measurability | ✅ | Sistem otomatis menghasilkan cumulative probability |
 
-**Prinsip mana yang paling sulit dipenuhi?** _______________
+---
+
+**Prinsip mana yang paling sulit dipenuhi?** 
+> Modularity
+
 **Strategi untuk mengatasinya:**
-> ___________________________________________________
+> Memisahkan Probability Engine, Pull Counter, dan Pity System menjadi modul independen agar perubahan weighted probability tidak memengaruhi komponen lain. 
 
 ---
 
@@ -146,14 +162,17 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 
 | Kondisi | Komponen A | Komponen B | Komponen C | Hasil yang Diharapkan |
 |---------|-----------|-----------|-----------|----------------------|
-| Full | *Contoh: ✅ CNN* | *Contoh: ✅ Temporal features* | *Contoh: ✅ Z-score norm* | *Baseline penuh* |
-| – A | ❌ (ganti RF) | ✅ | ✅ | |
-| – B | ✅ | ❌ (tanpa temporal) | ✅ | |
-| – C | ✅ | ✅ | ❌ (tanpa normalisasi) | |
+| Full | ✅ | ✅ | ✅ | Baseline sistem penuh |
+| – A | ❌ (Fixed Probability) | ✅ | ✅ | Peluang rare item lebih rendah |
+| – B | ✅ | ❌ | ✅ | Tidak ada guaranteed rare item |
+| – C | ✅ | ✅ | ❌ | Probability increase lebih lambat |
 
-**Komponen mana yang diprediksi paling berkontribusi?** _____
+**Komponen mana yang diprediksi paling berkontribusi?** 
+> Weighted Probability
+
 **Mengapa?**
-> ___________________________________________________
+> Karena weighted probability merupakan inti algoritma yang secara langsung menentukan perubahan peluang rare item pada setiap pull.
+
 
 ---
 
@@ -162,5 +181,6 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > Apa risiko jika sistem dibangun seperti produk (monolitik, fitur lengkap) lalu baru dilakukan eksperimen? Mengapa arsitektur modular penting untuk riset?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Sistem monolitik membuat variabel penelitian sulit diisolasi sehingga perubahan satu fitur dapat memengaruhi hasil eksperimen lain dan menurunkan validitas penelitian.
+
+> Arsitektur modular penting karena setiap komponen dipisahkan sehingga variabel dapat diuji secara terkontrol, lebih mudah dianalisis, dan eksperimen lebih mudah direproduksi.
