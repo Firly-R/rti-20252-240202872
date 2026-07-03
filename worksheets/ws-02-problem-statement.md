@@ -112,7 +112,7 @@ Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Pro
 | Researchable Problem | Bagaimana penerapan intervensi algoritma *weighted probability* dengan skema bertingkat (*soft pity* 50 dan *hard pity* 70) secara signifikan mampu mengubah akselerasi kurva *cumulative probability* dan memangkas rata-rata jumlah penarikan dibandingkan sistem *fixed* konstan? |
 | Measurable Variable | Nilai persentase *cumulative probability* per urutan penarikan (skala 0% - 100%) dan metrik rata-rata jumlah *pull* sukses (*average pulls to rare*) |
 
-**Apakah terjebak solution-first thinking?** [ ] Ya / [x] Tidak
+**Apakah terjebak solution-first thinking?** [ ] Ya / [X] Tidak
 > Jika ya, kembali ke tahap mana? ________________________
 
 ---
@@ -159,4 +159,5 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 
 **Jawaban:**
 > Masalah yang ditemui saat *coding* sehari-hari (*bug* atau *error*) bersifat deterministik, praktis, dan berorientasi pada perbaikan (*how to fix it*). Tujuannya adalah memperbaiki kerusakan sintaksis atau logika internal program agar sistem dapat berjalan normal kembali sesuai spesifikasi rekayasa perangkat lunak.
+> 
 > Sebaliknya, masalah riset berfokus pada celah pengetahuan (*gap of knowledge*) yang bersifat investigatif, teoritis, dan berorientasi pada pembuktian (*why and to what extent*). Pendekatan terhadap masalah riset tidak sekadar menuntut kode program dapat dieksekusi tanpa *error*, melainkan bagaimana kode program tersebut dirancang secara sistematis sebagai laboratorium buatan yang steril untuk menguji perilaku sebuah algoritma, mengumpulkan data statistiknya secara objektif, serta menarik kesimpulan ilmiah baru yang dapat dipertanggungjawabkan dan direplikasi oleh peneliti lain (*reproducible*).
