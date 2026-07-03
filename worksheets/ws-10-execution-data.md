@@ -70,22 +70,23 @@ EXECUTION PLAN
 
 | Run # | Skenario | Seed | Parameter | Status | Waktu | Output File |
 |-------|----------|------|-----------|--------|-------|-------------|
-| 1     |          |      |           |        |       |             |
-| 2     |          |      |           |        |       |             |
-| 3     |          |      |           |        |       |             |
-| ...   |          |      |           |        |       |             |
+| 1     | Fixed vs Weighted | 42 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha.csv |
+| 2     | Fixed vs Weighted | 123 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_2.csv |
+| 3     | Fixed vs Weighted | 999 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_3.csv |
+| 4     | Fixed vs Weighted | 2026 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_4.csv |
+| 5     | Fixed vs Weighted | 8888 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_5.csv |
 
-Jumlah runs per skenario : ____
-Total runs               : ____
+Jumlah runs per skenario : 5 (untuk masing-masing kondisi baseline dan intervention)
+Total runs               : 5 (dieksekusi secara bersamaan per run)
 
-DATA LOG (per run):
-  Run ID    : ____________________
-  Timestamp : ____________________
-  Skenario  : ____________________
-  Input     : ____________________
-  Output    : ____________________
-  Anomali   : ____________________
-  Catatan   : ____________________
+DATA LOG (per run - Contoh untuk Run #1):
+  Run ID    : run-sim-001
+  Timestamp : 2026-07-03T22:57:30
+  Skenario  : Komparasi Kondisi A (Fixed Probability) dan Kondisi B (Weighted Probability)
+  Input     : TOTAL_SAMPEL=100000, BASE_PROBABILITY=0.006, SOFT_PITY=50, HARD_PITY=70, RANDOM_SEED=42
+  Output    : hasil_simulasi_gacha.csv (berisi metrik Cumulative Probability dan Average Pulls)
+  Anomali   : -
+  Catatan   : Eksekusi eksperimen komparatif berbasis simulasi menggunakan data primer dari log mesin (pull simulator) untuk 100.000 pemain virtual.
 ```
 
 ---
@@ -94,17 +95,17 @@ DATA LOG (per run):
 
 Susun execution plan untuk eksperimen Anda. Tentukan skenario, jumlah run, dan seed sebelum eksekusi.
 
-| Run # | Skenario | Seed | Parameter Kunci | Status |
-|-------|----------|------|----------------|--------|
-| *1* | *Contoh: BERT-base, DS-1* | *42* | *lr=2e-5, epoch=10* | *Planned* |
-| *2* | *BERT-base, DS-1* | *123* | *lr=2e-5, epoch=10* | *Planned* |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| Run # | Skenario | Seed | Parameter | Status | Waktu | Output File |
+|-------|----------|------|-----------|--------|-------|-------------|
+| 1 | Fixed vs Weighted | 42 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha.csv |
+| 2 | Fixed vs Weighted | 123 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_2.csv |
+| 3 | Fixed vs Weighted | 999 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_3.csv |
+| 4 | Fixed vs Weighted | 2026 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_4.csv |
+| 5 | Fixed vs Weighted | 8888 | N=100.000, BP=0.6%, SP=50, HP=70 | Planned | TBD | hasil_simulasi_gacha_5.csv |
 
-**Total skenario:** ____
-**Run per skenario:** ____
-**Total run keseluruhan:** ____
+**Total skenario:** 2(kondisi A : Fixed Probability, Kondisi B : Weighted Probability
+**Run per skenario:** 5
+**Total run keseluruhan:** 5 kali eksekusi mesin simulasi
 
 ---
 
@@ -115,26 +116,27 @@ Desain format data log untuk eksperimen Anda. Tentukan field apa saja yang akan 
 **Identitas:**
 | Field | Contoh |
 |-------|--------|
-| Run ID | *run-001* |
-| Timestamp | *2025-03-15T10:30:00* |
-| | |
+| Run ID | run-sim-001 |
+| Timestamp | 2026-07-03T22:57:30 |
+| Skenario | Komparasi Algoritma Gacha: Fixed vs Weighted |
 
 **Konfigurasi:**
 | Field | Contoh |
 |-------|--------|
-| Seed | *42* |
-| Code version | *commit abc1234* |
-| | |
+| Seed | 42 |
+| Total sampel | 100000 |
+| Base probability | 0.006 |
+| Pity threshold | Soft pity = 50, Hard pity = 70
+| Code version | v1.0-sim-prototype |
 
 **Hasil:**
 | Metrik | Tipe Data | Range Valid |
 |--------|----------|-------------|
-| *Contoh: Accuracy* | *float* | *0.0 – 1.0* |
-| | | |
-| | | |
+| Average Pulls to Rare (Fixed & Weighted) | Float | 1.0 – Tidak Terhingga (Fixed) / 1.0 - 70.0 (Weighted) |
+| Cumulative Probability per Pull | Float | 0.0-100.0 |
 
-**Format output:** [ ] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
-
+**Format output:** [x] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
+> (Data akan diekspor sebagai hasil_simulasi_gacha.csv yang memuat baris Pull_Ke, Cumulative_Probability_Fixed, dan Cumulative_Probability_Weighted).
 ---
 
 ## Latihan 3 — Anomaly Protocol
@@ -143,10 +145,10 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 
 | Jenis Anomali | Contoh | Tindakan |
 |---------------|--------|----------|
-| Run gagal (crash) | *Contoh: OOM pada batch_size=64* | *Contoh: Dokumentasi, re-run batch_size=32, catat perubahan* |
-| Hasil ekstrem | | |
-| Waktu eksekusi anomali | | |
-| Inkonsistensi dengan run lain | | |
+| Run gagal (crash) | Memory Error (OOM) akibat list semua_data menampung >200.000 entri secara bersamaan dalam RAM. | Dokumentasi error. Lakukan optimasi kode (misal menggunakan generator atau memproses data langsung ke disk tanpa menyimpan raw array) dan ulangi run. |
+| Hasil ekstrem | Sistem Weighted membutuhkan pull > 70 (Hard Pity) padahal probabilitas seharusnya 100%. | Hentikan eksperimen sementara. Lakukan debugging pada fungsi simulasikan_satu_rare_item untuk memverifikasi logika probabilitas_saat_ini = 1.0. Catat perubahan kode. |
+| Waktu eksekusi anomali | Mesin pull simulator macet (infinite loop) pada kondisi fixed karena gagal acak RNG yang terus menerus. | Batasi limit iterasi (misal max pull = 1000 per orang untuk fixed), catat sebagai outlier, dan evaluasi fungsi random.random(). |
+| Inkonsistensi dengan run lain | Kumulatif Fixed tiba-tiba lebih besar dari Weighted setelah Soft Pity. | Verifikasi persamaan matematika perhitungan bobot: BASE_PROBABILITY + (jumlah_pull - (SOFT_PITY - 1)) * (1.0 / sisa_pull). Lakukan re-run. |
 
 **Prinsip:** Detect → Investigate → Document → Decide
 
@@ -157,6 +159,6 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 > Pernahkah Anda melaporkan hasil riset/tugas dari single run? Apa risikonya? Bagaimana multiple run mengubah kepercayaan terhadap hasil?
 
 **Pengalaman sebelumnya:**
-> ___________________________________________________
+> Pada eksperimen simulasi atau pembuatan sistem terdahulu, pengujian sering kali hanya dilakukan satu kali (single run) asalkan program tidak error dan sudah menghasilkan satu output atau persentase keberhasilan.
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
+> Simulasi probabilitas (gacha) sangat dipengaruhi oleh RNG (Random Number Generator). Mengandalkan single run sangat berisiko memunculkan bias kebetulan—bisa saja seed tertentu secara kebetulan memberikan rata-rata pull yang terlalu rendah atau terlalu tinggi. Ke depannya, saya akan selalu mengeksekusi minimal 5-10 run dengan seed yang berbeda, lalu mengambil nilai rata-rata dari seluruh komputasi tersebut untuk memastikan bahwa temuan terkait cumulative probability dapat dipertanggungjawabkan secara statistik.
