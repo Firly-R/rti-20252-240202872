@@ -1,12 +1,11 @@
 # Laporan Penelitian
 
-**Judul:** Analisis Pengaruh Algoritma Weighted Probability terhadap Peluang Rare Item pada Sistem Gacha Game
-
-**Peneliti:** Muhammad Firly Ramadhan
-**NIM:** 240202872
-**Mata Kuliah:** Riset Teknologi Informasi
-**Institusi:** Studi Ilmu Komputer, Fakultas Sains dan Teknologi, Universitas Putra Bangsa
-**Status Penelitian:** Seluruh tahap (Tahap 1–5) selesai; naskah jurnal final tersedia di ([../07-manuskrip/naskah-jurnal.md](../07-manuskrip/naskah-jurnal.md))
+| Judul: | Analisis Pengaruh Algoritma Weighted Probability terhadap Peluang Rare Item pada Sistem Gacha Game |
+| :---- | :---- |
+| Nama: | Muhammad Firly Ramadhan |
+| **NIM:** | 240202872 |
+| **Mata Kuliah:** | Riset Teknologi Informasi |
+| **Status Penelitian::** | Seluruh tahap (Tahap 1–5) selesai; naskah jurnal final tersedia di ([../07-manuskrip/naskah-jurnal.md](../07-manuskrip/naskah-jurnal.md)) |
 
 ---
 
